@@ -8,6 +8,7 @@ gem 'emk-sinatra-url-for'
 gem 'sinatra-respond_to'
 gem 'sequel'
 gem 'pg'
+gem 'redis'
 
 gem 'haml'
 
