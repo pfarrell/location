@@ -4,7 +4,7 @@ require 'logger'
   
 $console = ENV['RACK_ENV'] == 'development' ? Logger.new(STDOUT) : nil
 DB = Sequel.connect(
-  ENV['LOCATION_DB'] || 'postgres://pfarrell@localhost/location',
+  ENV['DATABASE_URL'] || 'postgres://pfarrell@localhost/location',
   logger: $console,
   test: true
 )
