@@ -27,9 +27,10 @@
   function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;  
-    m.innerHTML = "https://maps.google.com/?q=" + position.coords.latitude + "," + position.coords.longitude;
     pos = position;
-    initialize(pos.coords.latitude, pos.coords.longitude);
+    if(map == null) {
+      initialize(pos.coords.latitude, pos.coords.longitude);
+    }
   }
 
   function error() {
@@ -37,32 +38,29 @@
   }
 
   function initialize(lat,lng) {
-    if(map == null) {
-      var mapCanvas = document.getElementById('map');
-      var mapOptions = {
-        center: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        zoom: 15,
-        mapTypeId: google.maps.ROADMAP
-      }
-      map = new google.maps.Map(mapCanvas, mapOptions); }
-    if(marker == null) {
-      marker = new google.maps.Marker({  
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),  
-        map: map  
-      });
-    }
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+      center: new google.maps.LatLng(lat, lng),
+      zoom: 15,
+      mapTypeId: google.maps.ROADMAP
+    };
+    map = new google.maps.Map(mapCanvas, mapOptions);
+    marker = new google.maps.Marker({  
+      position: new google.maps.LatLng(lat, lng),  
+      map: map  
+    });
   }
 
 
   function moveLocation() {
-      getLocation(move);
+    getLocation(move);
   }
  
   function move(position) {
+    showPosition(position);
     pos=position;
     marker.setPosition( new google.maps.LatLng( pos.coords.latitude, pos.coords.longitude ) );
     map.panTo( new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));  
   }
 
   getLocation(null);
-                     i
